@@ -1,0 +1,29 @@
+import math
+def vectores(n):
+    l1=[]
+    l2=[]
+    suma=0
+    suma2=0
+    suma3=0
+    for x in range(0,n):
+        print "Ingrese el primer punto_",x+1,": "
+        a=input()
+        l1.append(a)
+    for y in range(0,n):
+        print "Ingrese el segundo punto_",y+1,": "
+        b=input()
+        l2.append(b)
+
+        
+    for z in range(0,n):
+        suma+=l1[z]*l2[z]
+    for c in range(0,n):
+        suma2+=l1[c]*l1[c]
+    suma2=math.sqrt(suma2)
+    for d in range(0,n):
+        suma3+=l2[d]*l2[d]
+    suma3=math.sqrt(suma3)
+    resultado=suma/(suma2*suma3)
+    resultado_total=math.acos(resultado)
+    print "El angulo es: ",math.degrees(resultado_total)
+A=vectores(3)

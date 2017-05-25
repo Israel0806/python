@@ -1,0 +1,22 @@
+def listas(n,nom):
+    a=[]
+    print "Ingresar elementos de la Lista ", nom, ":"
+    for x in range(0,n):
+        num = input("Ingrese un numero: ")
+        a.append(num)
+    print ""
+    return a
+
+n1=input("Ingrese la cantidad de elementos de A: ")
+n2=input("Ingrese la cantidad de elementos de B: ")
+
+A= listas(n1,"A")
+B= listas(n2,"B")
+print A, B
+
+def diferencia():
+    C=[]
+    for a in range(0,len(A):
+        for b in range(0,len(B):
+            if a[A]!=[B]:
+                C.append(B[b])

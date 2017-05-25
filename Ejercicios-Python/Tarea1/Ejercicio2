@@ -1,0 +1,24 @@
+def sacar_primos(n):
+    l2=[]
+    for x in range(0,n):
+        l=[]
+        N = input("Ingrese un numero: ")
+        if N==1:
+            l2.append(N)
+        num=1
+        B=N
+        while N>0:
+            if B%num==0:
+                if num!=N:
+                    l.append(num)
+            N-=1
+            num+=1
+        if len(l)==2:
+            l2.append(B)
+        
+    print "La lista de primos es: ",l2
+
+
+n=input("Ingrese la cantidad de elementos: ")
+
+A=sacar_primos(n)

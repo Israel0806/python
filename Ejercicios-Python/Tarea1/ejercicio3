@@ -1,0 +1,17 @@
+def nombres(n):
+    l1=[]
+    l2=[]
+    l3=[]
+    l4=[]
+    for x in range(0,n):
+        primer_nombre=raw_input("Ingrese el primer nombre: ")
+        segundo_nombre=raw_input("Ingrese el segundo nombre: ")
+        apellido=raw_input("Ingrese el apellido: ")
+        l1.append(primer_nombre)
+        l2.append(segundo_nombre)
+        l3.append(apellido)
+        l4.append(primer_nombre+" "+segundo_nombre[0]+". "+apellido)
+    print l4
+
+n=input("Ingrese el numero de personas: ")
+A=nombres(n)

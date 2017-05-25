@@ -1,0 +1,10 @@
+def lista(l,l2):
+    if len(l)==0:
+        return l2
+    else:
+        l2.append(l.pop(len(l)-1))
+        return lista(l,l2)
+
+l=[1,2,3,4,5]
+l2=[]
+print lista(l,l2)

@@ -1,0 +1,9 @@
+N=int(input("Ingrese un numero: "))
+num=1
+B=N
+while N>0:
+    if B%num==0:
+        print(num)
+        N-=1
+    num+=1
+    

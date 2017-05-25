@@ -1,0 +1,49 @@
+def listas(n,nom):
+    a=[]
+    print "Ingresar elementos de la Lista ", nom, ":"
+    for x in range(0,n):
+        num = input("Ingrese un numero: ")
+        a.append(num)
+    print ""
+    return a
+
+def diferencia(C1,C2):
+    C3=[]
+    C4=[]
+    for c in range(0,len(C1)):
+        C4.append(C1[c])
+    for d in range(0,len(C2)):
+        C4.append(C2[d])
+    for a in range(0,len(C1)):
+        for b in range(0,len(C2)):
+            if C1[a]==C2[b]:
+                C3.append(C1[a])
+    print C4, C3
+    x=0
+    while x<len(C4):
+        y=x+1
+        while y<len(C4):
+            if  y<=len(C4) and x<=len(C4):
+                if C4[x]==C4[y]:
+                    C4.pop(y)
+                y+=1
+        x+=1
+    v=0
+    while v<len(C4):
+        b=0
+        while b<len(C3):
+            if  b<=len(C3) and v<=len(C4):
+                if C4[v]==C3[b]:
+                    C4.pop(v)
+                b+=1
+        v+=1
+    print "La diferencia simetrica de las dos listas es:",C4
+
+n1=input("Ingrese la cantidad de elementos de A: ")
+n2=input("Ingrese la cantidad de elementos de B: ")
+
+A= listas(n1,"A")
+B= listas(n2,"B")
+C=diferencia(A,B)
+
+           

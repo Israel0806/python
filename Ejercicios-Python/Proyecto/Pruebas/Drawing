@@ -1,0 +1,35 @@
+import pygame
+pygame.init()
+white=(255,255,255)
+black=(0,0,0)
+red=(255,0,0)
+green=(0,255,0)
+blue=(0,0,255)
+gameDisplay=pygame.display.set_mode((800,700))
+
+brickImg=pygame.image.load("Ladrillo.png")
+
+l2= [[108,63,1],[108,96,1],[108,129,1],[108,162,1],[108,195,1],[108,228,1],
+    [191,63,1],[191,96,1],[191,129,1],[191,162,1],[191,195,1],[191,228,1],
+    [274,63,1],[274,96,1],[274,129,1],[274,162,1],[274,195,1],[274,228,1],
+    [357,63,1],[357,96,1],[357,129,1],[357,162,1],[357,195,1],[357,228,1],
+    [440,63,1],[440,96,1],[440,129,1],[440,162,1],[440,195,1],[440,228,1],
+    [523,63,1],[523,96,1],[523,129,1],[523,162,1],[523,195,1],[523,228,1],
+    [606,63,1],[606,96,1],[606,129,1],[606,162,1],[606,195,1],[606,228,1]]
+    
+gameDisplay.fill(black)
+
+
+while True:
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            pygame.quit()
+            quit()
+    x=0
+    while x<len(l2):
+        gameDisplay.blit(brickImg,(l2[x][0],l2[x][1]))        
+        x+=1
+##      pygame.draw."figura deseada(circle,pixel,rect,polygon)"
+##        pygame.draw.circle(gameDisplay,white,(300,500),24)
+##        pygame.draw.rect(gameDisplay,green,(250,300,150,20))
+    pygame.display.update()

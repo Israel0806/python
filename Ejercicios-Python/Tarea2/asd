@@ -1,0 +1,63 @@
+##matriz multi
+
+##def multiplicacion(mA,mB):
+
+
+num_f = input('Ingrese la cantidad de filas: ')
+num_c = input('Ingrese la cantidad de columnas: ')
+
+A = []
+
+print ''
+print 'Ingresar los elementos de la matriz:'
+print ''
+
+for f in range(0,num_f):
+    lista_aux = []
+    for c in range(0,num_c):
+        num = input('Ingrese un elemento: ')
+        lista_aux.append(num)
+    print 'lista_aux: ', lista_aux
+    A.append(lista_aux)
+
+print ''
+print 'Los elementos ingresados a la matriz son:'
+print ''
+
+for f in range(0,num_f):
+    print A[f]
+
+    
+
+num_f = input('Ingrese la cantidad de filas: ')
+num_c = input('Ingrese la cantidad de columnas: ')
+
+B = []
+
+print ''
+print 'Ingresar los elementos de la matriz:'
+print ''
+
+for f in range(0,num_f):
+    lista_aux = []
+    for c in range(0,num_c):
+        num = input('Ingrese un elemento: ')
+        lista_aux.append(num)
+    print 'lista_aux: ', lista_aux
+    B.append(lista_aux)
+
+print ''
+print 'Los elementos ingresados a la matriz son:'
+print ''
+
+for f in range(0,num_f):
+    print B[f]
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+class Alumno:
+    def __init__(self,codigo,nombre,email,semestre):
+        self.codigo=codigo
+        self.nombre=nombre
+        self.email=email
+        self.semestre=semestre
+
+
+class Profesor:
+    def __init__(self,codigo,nombre,email,categoria):
+        self.codigo=codigo
+        self.nombre=nombre
+        self.email=email
+        self.categoria=categoria
+
+class Escuela:
+    def __init__(self,nombre,numProfe,numAlum):
+        self.nombre=nombre
+        self.numprofe=numProfe
+        self.numAlum=numAlum
+        self.profesores=[]
+        self.alumnos=[]
+
+    def agregarProf(self,prof):
+        self.profesores.append(prof)
+
+    def agregarAlum(self,alum):
+        self.alumnos.append(alum)
+
+class Facultad:
+    def __init__(self,nombre,numEscu,numProf):
+        self.nombre=nombre
+        self.numEscu=numEscu
+        self.numProf
+        self.escuelas=[]
+
+    def agregarEscu(self,escu):
+        self.escuelas.append(escu)
+
+class Universidad:
+    def __init__(self,nombre,numFacul,numProf,numAlum):
+        self.nombre=nombre
+        self.numFacul=numFacul
+        self.numProf=numProf
+        self.numAlum=numAlum
+        self.facultades=[]
+
+    def agregarFacul(self,facul):
+        self.facultades.append(facul)
+
+alumno1=Alumno

@@ -1,0 +1,43 @@
+import pygame
+import time
+
+pygame.init()
+ancho=800
+largo=600
+blanco=(255,255,255)
+class Bola(pygame.sprite.Sprite):
+    def circulo(self):
+        pygame.sprite.Sprite.circulo(self)
+        self.rect=self.BolaImg.get_rect()
+        self.rect.centerx=ancho/2
+        self.rect.centery=largo/2
+        self.speed[0.5,-0.5]
+
+    def actualizar(self,time):
+        self.rect.centerx+=self.speed[0]*time
+        self.rect.centery+=self.speed[1]*time
+        if self.rect.left<=0 or self.rect.right>=ancho:
+            self.speed[0]=-self.speed[0]
+            self.rect.centerx+=self.speed[0]*time
+        if self.rect.top<=0 or self.rect.bottom>=largo:
+            self.speed[1]=-self.speed[1]
+            self.rect.centery+=self.speed[1]*time
+def mov():
+    gameDisplay=pygame.display.set_mode((ancho,largo))
+    clock=pygame.time.Clock()
+    BolaImg=pygame.image.load("C:\Users\Israel\Desktop\circulo.png")
+    bola=Bola()
+    while True:
+        time=clock.tick(60)
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+##        gameDisplay.fill(blanco)
+        bola.actualizar(time)
+        gameDisplay.blit(BolaImg,(0,0))
+        gameDisplay.blit(bola.image,bola.rect)
+        pygame.display.flip()
+
+mov() 
+    

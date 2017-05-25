@@ -1,0 +1,364 @@
+import pygame
+import time
+import random
+
+pygame.init()
+
+negro=(0,0,0)
+blanco=(255,255,255)
+rojo=(200,0,0)
+verde=(0,200,0)
+rojo_claro=(255,0,0)
+verde_claro=(0,255,0)
+ancho=800
+altura=700
+gameDisplay=pygame.display.set_mode((ancho,altura))
+pygame.display.set_caption("Meme Breakout")
+clock=pygame.time.Clock()
+barImg=pygame.image.load("C:\Users\Israel\Desktop\Barra.jpg")
+ballImg=pygame.image.load("C:\Users\Israel\Desktop\Bola222.jpg")
+brickImg=pygame.image.load("C:\Users\Israel\Desktop\Ladrillo.jpg")
+bar2Img=pygame.image.load("C:\Users\Israel\Desktop\BarraGrande.jpg")
+Barra=False
+tiempo=0
+pause=False
+cont=3
+powerup=False
+y3=228
+x3=606
+bolas=[[375,633]]
+
+def unpause():
+    global pause
+    pause=False
+
+def paused():
+    largeText=pygame.font.Font("freesansbold.ttf",115)
+    TextSurface,TextRect=text_objects("Paused",largeText)
+    TextRect.center=((ancho/2),(altura/2))
+    gameDisplay.blit(TextSurface,TextRect)
+     
+    while pause:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT :
+                pygame.quit()
+                quit()
+        #gameDisplay.fill(blanco)
+        
+
+        button("Continue",200,450,100,50,verde,verde_claro,"play")
+        button("QUIT",500,450,100,50,rojo,rojo_claro,"quit",)                
+        pygame.display.update()
+        clock.tick(60)
+
+def gameOver():
+    largeText=pygame.font.Font("freesansbold.ttf",115)
+    TextSurface,TextRect=text_objects("Game Over",largeText)
+    TextRect.center=((ancho/2),(altura/2))
+    gameDisplay.blit(TextSurface,TextRect)
+     
+    while True:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT :
+                pygame.quit()
+                quit()
+        #gameDisplay.fill(blanco)
+##            l=[[25,63],[25,96],[25,129],[25,162],[25,195],[25,228],[108,63],[108,96],[108,129],[108,162],[108,195],[108,228],[191,63],[191,96],[191,129],[191,162],[191,195],[191,228],[274,63],[274,96],[274,129],[274,162],[274,195],[274,228],[357,63],[357,96],[357,129],[357,162],[357,195],[357,228],[440,63],[440,96],[440,129],[440,162],[440,195],[440,228],[523,63],[523,96],[523,129],[523,162],[523,195],[523,228],[606,63],[606,96],[606,129],[606,162],[606,195],[606,228],[689,63],[689,96],[689,129],[689,162],[689,195],[689,228]]
+##            cont=3        
+
+        button("Play Again",200,450,100,50,verde,verde_claro,"play")
+        button("QUIT",500,450,100,50,rojo,rojo_claro,"quit",)                
+        pygame.display.update()
+        clock.tick(60)
+        
+def button(msg,x,y,w,h,ic,ac,action=None):
+    mouse=pygame.mouse.get_pos()
+    click=pygame.mouse.get_pressed()
+    if x+w>mouse[0]>x and y+h>mouse[1]>y:
+        pygame.draw.rect(gameDisplay,ac,(x,y,w,h))
+        if click[0]==1 and action!=None:
+            if action=="play":
+
+                nivel1()
+
+            elif action=="quit":
+                pygame.quit()
+                quit()
+    else:
+        pygame.draw.rect(gameDisplay,ic,(x,y,w,h))
+    smallText=pygame.font.Font("freesansbold.ttf",17)
+    textSurf,textRect=text_objects(msg,smallText)
+    textRect.center=((x+(w/2)),(y+(h/2)))
+    gameDisplay.blit(textSurf,textRect)
+    
+def text_objects(texto,font):
+    textSurface=font.render(texto,True,negro)
+    return textSurface,textSurface.get_rect()
+
+def message_display(texto):
+    largeText=pygame.font.Font("freesansbold.ttf",115)
+    TextSurface,TextRect=text_objects(texto,largeText)
+    TextRect.center=((ancho/2),(altura/2))
+    gameDisplay.blit(TextSurface,TextRect)
+    pygame.display.update()
+    time.sleep(2)
+    nivel1()
+
+def message_display2(texto):
+    largeText=pygame.font.Font("freesansbold.ttf",115)
+    TextSurface,TextRect=text_objects(texto,largeText)
+    TextRect.center=((ancho/2),(altura/2))
+    gameDisplay.blit(TextSurface,TextRect)
+    pygame.display.update()
+    time.sleep(2)
+    nivel2()            
+    
+def vidas(cont,bolas):
+    if len(bolas)==1:
+        if bolas[0][1]>567:
+            cont=cont-1
+        font=pygame.font.SysFont(None,25)
+        text=font.render(" Bolas: "+str(cont),True,negro)
+        gameDisplay.blit(text ,(0,0))
+        
+l=[[25,63],[25,96],[25,129],[25,162],[25,195],[25,228],[108,63],[108,96],[108,129],[108,162],[108,195],[108,228],[191,63],[191,96],[191,129],[191,162],[191,195],[191,228],[274,63],[274,96],[274,129],[274,162],[274,195],[274,228],[357,63],[357,96],[357,129],[357,162],[357,195],[357,228],[440,63],[440,96],[440,129],[440,162],[440,195],[440,228],[523,63],[523,96],[523,129],[523,162],[523,195],[523,228],[606,63],[606,96],[606,129],[606,162],[606,195],[606,228],[689,63],[689,96],[689,129],[689,162],[689,195],[689,228]]
+    
+def ladrillo(l):
+    x=0
+    ly=[63, 96, 129, 162, 195, 228]
+    lx=[25, 108, 191, 274, 357, 440, 523, 606, 689]
+    while x<len(l):
+##      gameDisplay.blit(ballImg,(x2-12,y2-15))
+        gameDisplay.blit(brickImg,(l[x][0],l[x][1]))        
+##        pygame.draw.rect(gameDisplay,rojo_claro,(l[x][0],l[x][1],80,30))
+        x+=1
+
+
+        
+speed2=5
+    
+    
+def powerUp():
+    global powerup
+    global y3
+    global x3
+    if powerup==True:
+##    if powerup==True:
+        pygame.draw.rect(gameDisplay,verde,(x3,y3,20,20))
+    
+##def powerupBarra(cor_x):
+##    pygame.draw.rect(gameDisplay,negro,(cor_x,650,233,20))
+##    gameDisplay.blit(bar2Img,(cor_x,650))
+
+##def powerupBolas(speed,bolas):
+##    bolas.append([375,633])
+##    speed.append([5,-5])
+
+
+def colision(bolas,speed,l):
+    global powerup
+##    ly=[63, 96, 129, 162, 195, 228]
+##    lx=[25, 108, 191, 274, 357, 440, 523, 606, 689]
+    e=0
+    r=0
+    i=0
+    while e<len(l):
+        for i in range(0,len(bolas)):
+##        while i<len(bolas):
+##            print bolas
+            if l[e][0]+85>=bolas[i][0]>=l[e][0]-5 and l[e][1]+40>=bolas[i][1]>=l[e][1]-5:
+                speed[i][1]=-speed[i][1]
+    ##            print l[e],"==",l[32]
+                if l[e][0]==689 and l[e][1]==228:
+                    powerup=True
+    ##                powerUp()
+                l.pop(e)
+##            i+=1
+
+
+##        choque de lado(bola) no resuelto
+##            if l[e][0]==x2-3 or x2==l[e][0]+80:
+##                speed[0]=-speed[0]
+##                print "x2",x2
+##                print "l",l[e][0]
+        
+
+def bola(bola):
+    for i in range(0,len(bolas)):
+        pygame.draw.circle(gameDisplay,verde,(bolas[i][0],bolas[i][1]),12)
+        gameDisplay.blit(ballImg,(bolas[i][0]-12,bolas[i][1]-15))
+    
+def barra(cor_x):
+    if Barra==False:
+        pygame.draw.rect(gameDisplay,negro,(cor_x,650,150,20))
+        gameDisplay.blit(barImg,(cor_x,650))
+    if Barra==True:
+        pygame.draw.rect(gameDisplay,negro,(cor_x,650,233,20))
+        gameDisplay.blit(bar2Img,(cor_x,650))
+
+        
+def intro():
+    intro=True
+    while intro:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+        gameDisplay.fill(blanco)
+        largeText=pygame.font.Font("freesansbold.ttf",90)
+        TextSurface,TextRect=text_objects("Meme Breakout",largeText)
+        TextRect.center=((ancho/2),(altura/2)-30)
+        gameDisplay.blit(TextSurface,TextRect)
+        button("PLAY",200,450,100,50,verde,verde_claro,"play")
+        button("QUIT",500,450,100,50,rojo,rojo_claro,"quit",)                
+        pygame.display.update()
+        clock.tick(60)
+
+##def nivel2():
+
+   
+##def nivel3():
+
+
+def nivel1():
+    global pause
+    global cont
+    global speed2
+    global x3
+    global Barra
+    global tiempo
+    global bolas
+    tiempo=0
+    temp=False
+    x_change=0
+    y3_change=0
+    cor_x=300
+##    x2=375
+##    y2=633
+    speed=[[5,-5]]
+    quit=False
+    while not quit:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_LEFT:
+                    x_change=-5
+                elif event.key==pygame.K_RIGHT:
+                    x_change=5
+                if event.key==pygame.K_p:
+                    pause=True
+                    paused()
+            if event.type==pygame.KEYUP:
+                if event.key==pygame.K_LEFT or event.key==pygame.K_RIGHT:
+                    x_change=0
+        gameDisplay.fill(blanco)
+        radio=12
+        
+
+        if Barra==False:
+            if cor_x>ancho-156:
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_RIGHT:
+                        x_change=0
+            if cor_x<6:
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_LEFT:
+                        x_change=0
+        if Barra==True:
+            if cor_x>ancho-236:
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_RIGHT:
+                        x_change=0
+            if cor_x<6:
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_LEFT:
+                        x_change=0
+        cor_x+=x_change
+        bola(bolas)
+        barra(cor_x)
+        vidas(cont,bolas)
+        ##codigo bola
+        i=0or i in ra
+        for i in range(0,len(bolas)):
+##        while i<len(bolas):
+        while i<len(bolas):
+            bolas[i][1]+=speed[i][1]
+            if bolas[i][0]<radio or bolas[i][0]>ancho-radio:
+                speed[i][0]=-speed[i][0]
+                bolas[i][0]+=speed[i][0]
+            if bolas[i][1]<radio or bolas[i][1]>670:
+                speed[i][1]=-speed[i][1]
+                bolas[i][1]+=speed[i][1]
+            
+
+    ##      codigo bola toca barra
+                
+            if Barra==False:
+                if cor_x+150>=bolas[i][0]>=cor_x+1 and bolas[i][1]==638:
+                    speed[i][1]=-speed[i][1]
+            if Barra==True:
+                if cor_x+233>=bolas[i][0]>=cor_x+1 and bolas[i][1]==638:
+                    speed[i][1]=-speed[i][1]
+    ##        x=0
+    ##        pos_x=25
+    ##        pos_y=30
+            colision(bolas,speed,l)
+            ladrillo(l)
+    ##        print powerup
+            if powerup==True:
+                global y3
+                y3_change=3
+                powerUp()
+                y3+=y3_change
+    ##      powerups
+            if temp==True:
+                tiempo+=30
+            if cor_x<=x3<=cor_x+150 and 639==y3 or y3==633:
+                Barra=not Barra
+                temp=not temps(speed,bolas)
+##                bolas.append([375,633])
+##                bolas.append([375,633])
+##                speed.append([5,-5])
+            print tiempo
+    ##        print tiempo
+    ##        if tiempo>5:
+    ##            Barra=False
+                en(bolas)==1:    
+                if bolas[i][1]>665:
+                    bolas.pop(i)
+                    bolas.pop(i)
+                    bolas=[
+                    bolas=[[375,633]]
+                        gameOver()
+                    message_display("-1 bola")
+                    bolas=[[375,633]]         
+                    bolas=[[375,633]]
+            if bolas[i][1]>665:
+##            i+=1
+            i+=1ola perdida
+        
+##        if cont==0:
+##            gameOver()
+
+##      codigo bola -1
+            
+
+                    
+##      fin level1
+            
+        if len(l)==0:
+            message_display2("Good Job")
+		
+        pygame.display.update()
+        clock.tick(60)
+    
+        
+intro()
+nivel1()
+##nivel2()
+##nivel3()
+pygame.quit()
+quit()
+

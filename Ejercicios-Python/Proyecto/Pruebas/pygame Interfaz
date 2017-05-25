@@ -1,0 +1,41 @@
+import pygame
+import time
+
+## pygame.init para iniciar la consola
+pygame.init() 
+
+ancho=800
+largo=600
+## colores segun rgb
+blanco=(255,255,255)
+
+##tamaño de la interfaz
+gameDisplay=pygame.display.set_mode((ancho,largo))
+##frames por segundo 
+
+clock=pygame.time.Clock()
+
+## para salir del juego
+while True:
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            pygame.quit()
+            quit()
+##    rellenar toda la interfaz de blanco
+    gameDisplay.fill(blanco)
+
+
+
+
+
+
+
+
+    
+##    print event
+##    actualizar la interfaz    
+    pygame.display.update()
+
+##    frames por segundo dados
+    clock.tick(60)
+    
